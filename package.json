@@ -9,9 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "next": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "next": "latest"
+    "react-credit-cards": "^0.8.3",
+    "react-dom": "latest"
   },
   "devDependencies": {
     "autoprefixer": "latest",
