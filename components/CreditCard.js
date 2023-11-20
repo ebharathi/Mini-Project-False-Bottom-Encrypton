@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import ReCAPTCHA from "react-google-recaptcha";
+import axios from 'axios';
 const CreditCard=()=>{
     const [name,setName]=useState("");
     const [number,setNumber]=useState("");
@@ -53,12 +54,27 @@ const CreditCard=()=>{
         }
       }
       //form submit function
-      const handleSubmit=(e)=>{
+      const handleSubmit=async(e)=>{
         e.preventDefault();
          console.log("CARD NUMBER--->",number);
          console.log("CVC--->",cvc);
          console.log("EXPIRY DATE--->",expiry);
          console.log("NAME-->",name);
+         //code to send request to python
+         let options={
+            url:'',//python router
+            method:'POST',
+            data:{
+                cardHoldername:name,
+                cardNo:number,
+                cardCVC:cvc,
+                expiry:expiry
+            }
+         }
+         await axios(options)
+         .then((response)=>{
+              console.log("RESPONSE FROM PYTHON BACKEND--------->",response);
+         })
       }
    return(
     <div className='flex justify-center items-center mt-20'>
