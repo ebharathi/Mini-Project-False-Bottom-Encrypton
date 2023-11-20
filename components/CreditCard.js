@@ -23,8 +23,8 @@ const CreditCard=()=>{
         const value = e.target.value;
         if (/^\d*$/.test(value) && index >= 0 && index <= 3) {
             setCardNumber(prevArray => {
-                const newArray = [...prevArray]; // Create a copy of the original array
-                newArray[index] = value; // Update the value at the specified index
+                const newArray = [...prevArray];
+                newArray[index] = value; 
                 let n=""; 
                 newArray.map((i)=>{
                       n+=i;
@@ -52,11 +52,13 @@ const CreditCard=()=>{
             }
         }
       }
+      //form submit function
       const handleSubmit=(e)=>{
         e.preventDefault();
          console.log("CARD NUMBER--->",number);
          console.log("CVC--->",cvc);
-         console.log("EXPIRY DATE--->",expiry)
+         console.log("EXPIRY DATE--->",expiry);
+         console.log("NAME-->",name);
       }
    return(
     <div className='flex justify-center items-center mt-20'>
