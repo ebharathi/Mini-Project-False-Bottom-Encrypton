@@ -3,7 +3,7 @@ import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import ReCAPTCHA from "react-google-recaptcha";
 const CreditCard=()=>{
-    const [name,setName]=useState("FALSE-BOTTOM ENCRYPTIION");
+    const [name,setName]=useState("");
     const [number,setNumber]=useState("");
     const [cardNumber,setCardNumber]=useState([]);
     const [cvc,setCvc]=useState("");
@@ -76,7 +76,7 @@ const CreditCard=()=>{
             {Array.from({ length: 4 }).map((_, index) => (
                     <input
                     key={index}
-                    className='border-1 border-[#70706f] w-20 mx-1 px-5 py-2 rounded-md outline-none'
+                    className='border-1 mr-1 border-[#70706f] w-20  px-5 py-2 rounded-md outline-none'
                     id={`input${index+1}`}
                     type='text'
                     name={`number-${index + 1}`}
@@ -92,6 +92,17 @@ const CreditCard=()=>{
             <div className='text-center py-3'>
             <input
                  className='border-1 border-[#70706f] w-full px-6 py-2 rounded-md outline-none'
+                 placeholder='CARD HOLDER' 
+                 type='text'
+                 maxLength={    30}
+                 name="name" 
+                 value={name}
+                 onChange={(e)=>{setName(e.target.value)}}
+                 onFocus={(e)=>setFocused(e.target.name)}/>
+            </div>
+            {/* <div className='text-center py-3'>
+            <input
+                 className='border-1 border-[#70706f] w-full px-6 py-2 rounded-md outline-none'
                  placeholder='CVC' 
                  type='text'
                  name="cvc" 
@@ -99,10 +110,19 @@ const CreditCard=()=>{
                  maxLength={3}
                  onChange={(e)=>{setCvc(e.target.value)}}
                  onFocus={(e)=>setFocused(e.target.name)}/>
-            </div>
+            </div> */}
             <div className='text-center'>
+                <input
+                 className='border-1 border-[#70706f] w-24 mr-1 px-6 py-2 rounded-md outline-none'
+                 placeholder='CVC' 
+                 type='text'
+                 name="cvc" 
+                 value={cvc}
+                 maxLength={3}
+                 onChange={(e)=>{setCvc(e.target.value)}}
+                 onFocus={(e)=>setFocused(e.target.name)}/>
                  <select
-                 className='border-1 border-[#70706f] w-40 px-6 py-2 rounded-md outline-none'
+                 className='border-1 border-[#70706f] w-28  px-6 py-2 rounded-md outline-none'
                  name="expiry"
                  onChange={(e)=>setExpiryMonthSelect(e.target.value)}
                  onFocus={(e)=>setFocused(e.target.name)}
@@ -111,7 +131,7 @@ const CreditCard=()=>{
                         {months.map((single)=><option>{single}</option>)}
                  </select>
                  <select
-                 className='ml-1 border-1 border-[#70706f] w-48 px-6 py-2 rounded-md outline-none'
+                 className='ml-1 border-1 border-[#70706f] w-32 px-6 py-2 rounded-md outline-none'
                  name="expiry"
                  onChange={(e)=>setExpiryYearSelect(e.target.value)}
                  onFocus={(e)=>setFocused(e.target.name)}
