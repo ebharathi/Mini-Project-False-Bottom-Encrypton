@@ -13,7 +13,8 @@
     "prop-types": "^15.8.1",
     "react": "latest",
     "react-credit-cards": "^0.8.3",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-google-recaptcha": "^3.1.0"
   },
   "devDependencies": {
     "autoprefixer": "latest",
