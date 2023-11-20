@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 const CreditCard=()=>{
-    const [name,setName]=useState("");
+    const [name,setName]=useState("FALSE-BOTTOM ENCRYPTIION");
     const [number,setNumber]=useState("");
     const [cvc,setCvc]=useState("");
     const [expiry,setExpiry]=useState("");
@@ -18,8 +18,8 @@ const CreditCard=()=>{
     },[expiryMonthSelect,expiryYearSelect])
    return(
     <div className='flex justify-center items-center mt-20'>
-      <div className='flex flex-col md:flex-row'>
-        <div className='flex justify-center items-center'>
+      <div className='flex flex-col'>
+        <div className='text-center'>
             <Cards
             cvc={cvc}
             expiry={expiry}
@@ -31,7 +31,7 @@ const CreditCard=()=>{
         <div className='flex justify-center items-center  px-20'>
             <form className='pt-20'>
                 <input 
-                 className='border-2 px-6 py-2'
+                 className='border-1 border-[#70706f] w-custom-1 px-6 py-3 rounded-lg outline-none '
                  placeholder='Card Number' 
                  type='number'
                  name="number" 
@@ -40,16 +40,7 @@ const CreditCard=()=>{
                  <br/>
                  <br/>
                 <input
-                 className='border-2 px-6 py-2'
-                 placeholder='Holder Name' 
-                 type='text'
-                 name="name" 
-                 onChange={(e)=>{setName(e.target.value)}}
-                 onFocus={(e)=>setFocused(e.target.name)}/>
-                 <br/>
-                 <br/>
-                <input
-                 className='border-2 px-6 py-2'
+                 className='border-1 border-[#70706f] w-custom-1 px-6 py-3 rounded-lg outline-none'
                  placeholder='CVC' 
                  type='number'
                  name="cvc" 
@@ -58,7 +49,7 @@ const CreditCard=()=>{
                  <br/>
                  <br/>
                  <select
-                 className='border-2 px-6 py-2'
+                 className='border-1 border-[#70706f] w-40 px-6 py-3 rounded-lg outline-none'
                  name="expiry"
                  onChange={(e)=>setExpiryMonthSelect(e.target.value)}
                  onFocus={(e)=>setFocused(e.target.name)}
@@ -66,7 +57,7 @@ const CreditCard=()=>{
                         {months.map((single)=><option>{single}</option>)}
                  </select>
                  <select
-                 className='border-2 px-10 py-2'
+                 className='mx-3 border-1 border-[#70706f] w-32 px-6 py-3 rounded-lg outline-none'
                  name="expiry"
                  onChange={(e)=>setExpiryYearSelect(e.target.value)}
                  onFocus={(e)=>setFocused(e.target.name)}
@@ -78,7 +69,7 @@ const CreditCard=()=>{
                  <div className='text-center'>
                     <button
                     type="submit"
-                    className='btn bg-[#2578f5] px-5 py-2 rounded-lg text-white hover:text-[#2578f5] hover:bg-white'
+                    className='btn bg-black  px-5 py-2 rounded-lg text-white w-full hover:text-[black] hover:border-1 hover:border-black hover:bg-white'
                     >
                         PAY
                     </button>
