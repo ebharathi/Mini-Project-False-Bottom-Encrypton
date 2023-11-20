@@ -90,7 +90,18 @@ const CreditCard=()=>{
         </div>
         <div className='flex justify-center items-center  px-20 '>
             <form className='pt-10'>
-            <div className='grid grid-cols-4'>
+            <div className='text-center py-3'>
+            <input
+                 className='border-1 border-[#70706f] w-full px-6 py-2 rounded-md outline-none'
+                 placeholder='CARD HOLDER' 
+                 type='text'
+                 maxLength={    30}
+                 name="name" 
+                 value={name}
+                 onChange={(e)=>{setName(e.target.value)}}
+                 onFocus={(e)=>setFocused(e.target.name)}/>
+            </div>
+            <div className='grid grid-cols-4 mb-2'>
             {Array.from({ length: 4 }).map((_, index) => (
                     <input
                     key={index}
@@ -106,17 +117,6 @@ const CreditCard=()=>{
                     />
             ))}
 
-            </div>
-            <div className='text-center py-3'>
-            <input
-                 className='border-1 border-[#70706f] w-full px-6 py-2 rounded-md outline-none'
-                 placeholder='CARD HOLDER' 
-                 type='text'
-                 maxLength={    30}
-                 name="name" 
-                 value={name}
-                 onChange={(e)=>{setName(e.target.value)}}
-                 onFocus={(e)=>setFocused(e.target.name)}/>
             </div>
             {/* <div className='text-center py-3'>
             <input
