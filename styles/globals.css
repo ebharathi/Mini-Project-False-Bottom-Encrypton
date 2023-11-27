@@ -5,6 +5,11 @@
 input::placeholder{
   color:black !important
 }
+.bg-img-home{
+  background: url("../images//bg.jpg");
+  background-repeat: no-repeat;
+  background-size:cover;
+}
 .bg-img{
   background: url("../images//bg1.jpg");
   background-repeat: no-repeat;

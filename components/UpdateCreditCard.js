@@ -3,7 +3,7 @@ import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
-const UpdateCreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=>{
+const UpdateCreditCard=({updateCardInfos})=>{
     const [name,setName]=useState("");
     const [number,setNumber]=useState("");
     const [cardNumber,setCardNumber]=useState([]);
@@ -17,7 +17,7 @@ const UpdateCreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=t
     let year=[23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40];
     //useEffect for expirydate select
     useEffect(()=>{
-        setExpiry(expiryMonthSelect+expiryYearSelect.substring(2));
+        setExpiry(expiryYearSelect.substring(2)+expiryMonthSelect);
     },[expiryMonthSelect,expiryYearSelect])
     //handle iput change for number
     const handleInputChange = (e, index) => {
@@ -52,30 +52,11 @@ const UpdateCreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=t
                 nextInput.focus();
             }
         }
-      }
-      //form submit function
-      const handleSubmit=async(e)=>{
+    }
+    const handleSubmit = (e) => {
         e.preventDefault();
-         console.log("CARD NUMBER--->",number);
-         console.log("CVC--->",cvc);
-         console.log("EXPIRY DATE--->",expiry);
-         console.log("NAME-->",name);
-         //code to send request to python
-         let options={
-            url:'',//python router
-            method:'POST',
-            data:{
-                cardHoldername:name,
-                cardNo:number,
-                cardCVC:cvc,
-                expiry:expiry
-            }
-         }
-         await axios(options)
-         .then((response)=>{
-              console.log("RESPONSE FROM PYTHON BACKEND--------->",response);
-         })
-      }
+        updateCardInfos(name);
+    }
    return(
     <div className='flex justify-center items-center mt-20'>
       <div className='flex flex-col'>
@@ -92,7 +73,7 @@ const UpdateCreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=t
             <form className='pt-10'>
             <div className='text-center py-3'>
             <input
-                 className='border-1 border-[#70706f] w-full px-6 py-2 rounded-md outline-none'
+                 className='border-1 border-[#70706f] w-80 px-6 py-2 rounded-md outline-none'
                  placeholder='CARD HOLDER' 
                  type='text'
                  maxLength={    30}

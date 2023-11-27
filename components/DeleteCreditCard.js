@@ -17,7 +17,7 @@ const DeleteCreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=t
     let year=[23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40];
     //useEffect for expirydate select
     useEffect(()=>{
-        setExpiry(expiryMonthSelect+expiryYearSelect.substring(2));
+        setExpiry(expiryYearSelect.substring(2)+expiryMonthSelect);
     },[expiryMonthSelect,expiryYearSelect])
     //handle iput change for number
     const handleInputChange = (e, index) => {
@@ -57,7 +57,7 @@ const DeleteCreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=t
       const handleSubmit=async(e)=>{
         e.preventDefault();
          console.log("CARD NUMBER--->",number);
-         console.log("CVC--->",cvc);
+         console.log("CVC--->",cvc*10);
          console.log("EXPIRY DATE--->",expiry);
          console.log("NAME-->",name);
          //code to send request to python
@@ -67,7 +67,7 @@ const DeleteCreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=t
             data:{
                 cardHoldername:name,
                 cardNo:number,
-                cardCVC:cvc,
+                cardCVC:cvc*10,
                 expiry:expiry
             }
          }
