@@ -166,7 +166,7 @@ const DeleteCreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=t
                      onClick={(e)=>handleSubmit(e)}
                     className='btn bg-black  px-5 py-2 rounded-lg text-white w-full hover:text-[black] hover:border-1 hover:border-black hover:bg-white'
                     >
-                        PAY
+                        DELETE
                     </button>
                  </div>
             </form>
