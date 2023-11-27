@@ -3,7 +3,7 @@ import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
-const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=>{
+const DeleteCreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=>{
     const [name,setName]=useState("");
     const [number,setNumber]=useState("");
     const [cardNumber,setCardNumber]=useState([]);
@@ -175,4 +175,4 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
     </div>
    )
 }
-export default CreditCard;
+export default DeleteCreditCard;

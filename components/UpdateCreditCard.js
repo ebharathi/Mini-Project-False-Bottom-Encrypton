@@ -3,7 +3,7 @@ import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
-const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=>{
+const UpdateCreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=>{
     const [name,setName]=useState("");
     const [number,setNumber]=useState("");
     const [cardNumber,setCardNumber]=useState([]);
@@ -101,63 +101,6 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
                  onChange={(e)=>{setName(e.target.value)}}
                  onFocus={(e)=>setFocused(e.target.name)}/>
             </div>
-            <div className='grid grid-cols-4 mb-2'>
-            {Array.from({ length: 4 }).map((_, index) => (
-                    <input
-                    key={index}
-                    className='border-1 mr-1 border-[#70706f] w-20  px-5 py-2 rounded-md outline-none'
-                    id={`input${index+1}`}
-                    type='text'
-                    name={`number-${index + 1}`}
-                    maxLength={4}
-                    value={cardNumber[index] || ''}
-                    onInput={(e)=>moveToNext(e,`${'input'+(index+2)}`)}
-                    onChange={(e) => handleInputChange(e, index)}
-                    onFocus={(e) => e.target.select()}
-                    />
-            ))}
-
-            </div>
-            {/* <div className='text-center py-3'>
-            <input
-                 className='border-1 border-[#70706f] w-full px-6 py-2 rounded-md outline-none'
-                 placeholder='CVC' 
-                 type='text'
-                 name="cvc" 
-                 value={cvc}
-                 maxLength={3}
-                 onChange={(e)=>{setCvc(e.target.value)}}
-                 onFocus={(e)=>setFocused(e.target.name)}/>
-            </div> */}
-            <div className='text-center'>
-                <input
-                 className='border-1 border-[#70706f] w-24 mr-1 px-6 py-2 rounded-md outline-none'
-                 placeholder='CVC' 
-                 type='text'
-                 name="cvc" 
-                 value={cvc}
-                 maxLength={3}
-                 onChange={(e)=>{setCvc(e.target.value)}}
-                 onFocus={(e)=>setFocused(e.target.name)}/>
-                 <select
-                 className='border-1 border-[#70706f] w-28  px-6 py-2 rounded-md outline-none'
-                 name="expiry"
-                 onChange={(e)=>setExpiryMonthSelect(e.target.value)}
-                 onFocus={(e)=>setFocused(e.target.name)}
-                 >
-                        <option selected disabled>MM</option>
-                        {months.map((single)=><option>{single}</option>)}
-                 </select>
-                 <select
-                 className='ml-1 border-1 border-[#70706f] w-32 px-6 py-2 rounded-md outline-none'
-                 name="expiry"
-                 onChange={(e)=>setExpiryYearSelect(e.target.value)}
-                 onFocus={(e)=>setFocused(e.target.name)}
-                   >
-                       <option selected disabled>YYYY</option>
-                       {year.map((single)=><option>20{single}</option>)}
-                 </select>
-            </div>
                  <div className='my-2 flex justify-center items-center'>
                      <ReCAPTCHA sitekey="6LfuaBUpAAAAAPcnG95Ak3oOBd8bqh2dKBwYe4qN" />
                  </div>
@@ -166,7 +109,7 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
                      onClick={(e)=>handleSubmit(e)}
                     className='btn bg-black  px-5 py-2 rounded-lg text-white w-full hover:text-[black] hover:border-1 hover:border-black hover:bg-white'
                     >
-                        PAY
+                        UPDATE
                     </button>
                  </div>
             </form>
@@ -175,4 +118,4 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
     </div>
    )
 }
-export default CreditCard;
+export default UpdateCreditCard;

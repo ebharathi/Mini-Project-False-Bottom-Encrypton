@@ -28,3 +28,8 @@ body {
 input::placeholder{
   color:black !important
 }
+main{
+  /* background: url("https://cdni.iconscout.com/illustration/premium/thumb/online-payment-2496112-2088555.png"); */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+}
