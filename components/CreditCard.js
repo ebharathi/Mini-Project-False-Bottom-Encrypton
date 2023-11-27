@@ -11,7 +11,8 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
     const [expiry,setExpiry]=useState("");
     const [focused,setFocused]=useState("");
     const [expiryMonthSelect,setExpiryMonthSelect]=useState("");
-    const [expiryYearSelect,setExpiryYearSelect]=useState("");
+    const [expiryYearSelect, setExpiryYearSelect] = useState("");
+    const [success,setSuccess]=useState(false)
     //for expiry date
     let months=["01","02","03","04","05","06","07","08","09","10","11","12"];
     let year=[23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40];
@@ -56,24 +57,31 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
       //form submit function
       const handleSubmit=async(e)=>{
         e.preventDefault();
-         console.log("CARD NUMBER--->",number);
-         console.log("CVC--->",cvc*10);
-         console.log("EXPIRY DATE--->",expiry);
-         console.log("NAME-->",name);
+        let message_array = [];
+        cardNumber.map((s) => {
+           message_array.push(parseInt(s))
+        })
+        message_array.push(cvc * 10)
+        message_array.push(expiry)
          //code to send request to python
          let options={
-            url:'',//python router
+            url:'http://localhost:8000/admin/register',//python router
             method:'POST',
             data:{
-                cardHoldername:name,
-                cardNo:number,
-                cardCVC:cvc*10,
-                expiry:expiry
+                name:name,
+                message_array:message_array
             }
          }
          await axios(options)
          .then((response)=>{
               console.log("RESPONSE FROM PYTHON BACKEND--------->",response);
+           if (response.data.error == 'false')
+           {
+              setSuccess(true) 
+              setTimeout(() => {
+                setSuccess(false);
+              }, 5000);
+            }
          })
       }
    return(
@@ -163,10 +171,10 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
                  </div>
                  <div className='text-center'>
                     <button
-                     onClick={(e)=>handleSubmit(e)}
-                    className='btn bg-black  px-5 py-2 rounded-lg text-white w-full hover:text-[black] hover:border-1 hover:border-black hover:bg-white'
+                 onClick={(e) => handleSubmit(e)}
+                 className={`btn bg-black  px-5 py-2 rounded-lg text-white w-full hover:text-[black] hover:border-1 hover:border-black hover:bg-white ${success?'bg-green-500 text-white':''}`}
                     >
-                        REGISTER
+                       {success?'SUCCESFULLY REGISTERED':'REGISTER'}
                     </button>
                  </div>
             </form>
