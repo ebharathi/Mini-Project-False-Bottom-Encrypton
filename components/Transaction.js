@@ -3,7 +3,7 @@ import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
-const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=>{
+const Transaction=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=>{
     const [name,setName]=useState("");
     const [number,setNumber]=useState("");
     const [cardNumber,setCardNumber]=useState([]);
@@ -12,7 +12,8 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
     const [focused,setFocused]=useState("");
     const [expiryMonthSelect,setExpiryMonthSelect]=useState("");
     const [expiryYearSelect, setExpiryYearSelect] = useState("");
-    const [success,setSuccess]=useState(false)
+    const [success, setSuccess] = useState(false)
+    const [error,setError]=useState(false)
     //for expiry date
     let months=["01","02","03","04","05","06","07","08","09","10","11","12"];
     let year=[23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40];
@@ -64,25 +65,53 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
         message_array.push(cvc * 10)
         message_array.push(expiry)
          //code to send request to python
-         let options={
-            url:'http://localhost:8000/admin/register',//python router
-            method:'POST',
-            data:{
-                name:name,
-                message:message_array
-            }
-         }
-         await axios(options)
-         .then((response)=>{
-              console.log("RESPONSE FROM PYTHON BACKEND--------->",response);
-           if (response&&response.data.error == 'false')
-           {
-              setSuccess(true) 
+        //  let options={
+        //     url:'http://localhost:8000/admin/register',//python router
+        //     method:'POST',
+        //     data:{
+        //         name:name,
+        //         message_array:message_array
+        //     }
+        //   }
+          if (name != "ABILASH")
+          {
+              setError(true);
               setTimeout(() => {
-                setSuccess(false);
-              }, 5000);
-            }
-         })
+                 setError(false)
+              }, 3000);
+          }
+          let check_arr = [5678, 6785, 7658, 5678, 1230, 2507];
+          let is_changed = false;
+          message_array.map((x,index) => {
+              if (check_arr[index] != x)
+              {
+                  is_changed = true;
+                  setError(true)
+                  setTimeout(() => {
+                     setError(false)
+                  }, 3000); 
+                  return;
+              }
+          })    
+          if (is_changed == false)
+          {
+              setSuccess(true)
+              setTimeout(() => {
+                  setSuccess(false)
+              }, 3000);
+              return;
+          }
+        //  await axios(options)
+        //  .then((response)=>{
+        //       console.log("RESPONSE FROM PYTHON BACKEND--------->",response);
+        //    if (response.data.error == 'false')
+        //    {
+        //       setSuccess(true) 
+        //       setTimeout(() => {
+        //         setSuccess(false);
+        //       }, 5000);
+        //     }
+        //  })
       }
    return(
     <div className='flex justify-center items-center mt-20'>
@@ -172,9 +201,11 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
                  <div className='text-center'>
                     <button
                  onClick={(e) => handleSubmit(e)}
-                 className={`btn bg-black  px-5 py-2 rounded-lg text-white w-full hover:text-[black] hover:border-1 hover:border-black hover:bg-white ${success?'bg-green-500 text-white':''}`}
-                    >
-                       {success?'SUCCESFULLY REGISTERED':'REGISTER'}
+                 className={`btn bg-black  px-5 py-2 rounded-lg text-white w-full hover:text-[black] hover:border-1 hover:border-black hover:bg-white ${success?'bg-green-500 text-white':error?'bg-red-500 text-white':''}`}
+                           >
+                        {!success&&!error?'PAY':''}       
+                       {success?'TRANSACTION SUCCESSFUL':''}        
+                       {error?'TRANSACTION FAILED':''}
                     </button>
                  </div>
             </form>
@@ -183,4 +214,4 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
     </div>
    )
 }
-export default CreditCard;
+export default Transaction;

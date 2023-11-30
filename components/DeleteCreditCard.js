@@ -68,7 +68,7 @@ const DeleteCreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=t
          await axios(options)
          .then((response)=>{
              console.log("RESPONSE FROM PYTHON BACKEND--------->", response);
-             if (response.data.error == "false")
+             if (response&&response.data.error == "false")
              {
                setSuccess(true)
                setTimeout(() => {

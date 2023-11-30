@@ -26,6 +26,11 @@ export default function Home() {
                   <Link href="/update">UPDATE</Link>
             </button>
           </div>  
+          <div className='text-center py-5'>
+            <button className='bg-blue-500 w-60 rounded-md px-10 py-5 text-[20px] text-white hover:bg-white hover:text-blue-500 hover:border-1 hover:border-blue-500'>
+                  <Link href="/verify">TRANSACTION</Link>
+            </button>
+          </div>  
          </div>
          <div className='col-span-2'></div>
          

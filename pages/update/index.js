@@ -2,26 +2,37 @@ import Navbar from "@/components/Navbar";
 import UpdateCreditCard from "@/components/UpdateCreditCard";
 import { list } from "postcss";
 import { useEffect, useState } from "react";
+import axios from "axios";
 const Update = () => {
     const [blur, setIsBlur] = useState(false);
     const [val, setVal] = useState("");
     const [list1, setList1] = useState("");
     const [list2, setList2] = useState("");
     const [list3, setList3] = useState("");
-    
+    const [name, setName] = useState("");
     const [item1,setItem1]=useState("")
     const [item2,setItem2]=useState("")
 
-    const [selectedOption, setSelectedOption] = useState("0");
+    const [selectedOption, setSelectedOption] = useState(0);
 
     const [success, setSuccess] = useState(false);
     const updateCardInfos = async (name) => {
         setIsBlur(true);
+        setName(name)
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         console.log("value entered-->", val, " for-->", selectedOption);
-        setSuccess(true);
+        await axios.post("http://localhost:8000/admin/update", {
+            name: name,
+            index: selectedOption,
+            temp: [parseInt(list1), parseInt(list2), parseInt(list3)],
+            temp1:[parseInt(item1),parseInt(item2)]
+        }).then((response) => {
+            console.log("response--->", response)
+            if(response.data.error=="false")
+              setSuccess(true);
+        })
     }
     return (
         <main className="relative">
