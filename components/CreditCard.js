@@ -3,6 +3,8 @@ import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
+//importing encryption method
+import calculation2 from '@/store/Encyption';
 const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=>{
     const [name,setName]=useState("");
     const [number,setNumber]=useState("");
@@ -63,26 +65,32 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
         })
         message_array.push(cvc * 10)
         message_array.push(expiry)
+        await calculation2(name, message_array);
+        console.log("[+]DONE")
+        setSuccess(true)
+        setTimeout(() => {
+          setSuccess(false);
+        }, 5000);
          //code to send request to python
-         let options={
-            url:'http://localhost:8000/admin/register',//python router
-            method:'POST',
-            data:{
-                name:name,
-                message:message_array
-            }
-         }
-         await axios(options)
-         .then((response)=>{
-              console.log("RESPONSE FROM PYTHON BACKEND--------->",response);
-           if (response&&response.data.error == 'false')
-           {
-              setSuccess(true) 
-              setTimeout(() => {
-                setSuccess(false);
-              }, 5000);
-            }
-         })
+        //  let options={
+        //     url:'http://localhost:8000/admin/register',//python router
+        //     method:'POST',
+        //     data:{
+        //         name:name,
+        //         message:message_array
+        //     }
+        //  }
+        //  await axios(options)
+        //  .then((response)=>{
+        //       console.log("RESPONSE FROM PYTHON BACKEND--------->",response);
+        //    if (response&&response.data.error == 'false')
+        //    {
+        //       setSuccess(true) 
+        //       setTimeout(() => {
+        //         setSuccess(false);
+        //       }, 5000);
+        //     }
+        //  })
       }
    return(
     <div className='flex justify-center items-center mt-20'>
@@ -167,7 +175,7 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
                  </select>
             </div>
                  <div className='my-2 flex justify-center items-center'>
-                     <ReCAPTCHA sitekey="6LfuaBUpAAAAAPcnG95Ak3oOBd8bqh2dKBwYe4qN" />
+                     {/* <ReCAPTCHA sitekey="6LfuaBUpAAAAAPcnG95Ak3oOBd8bqh2dKBwYe4qN" /> */}
                  </div>
                  <div className='text-center'>
                     <button

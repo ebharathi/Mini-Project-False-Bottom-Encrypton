@@ -160,7 +160,7 @@ const DeleteCreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=t
                  </select>
             </div> */}
                  <div className='my-2 flex justify-center items-center'>
-                     <ReCAPTCHA sitekey="6LfuaBUpAAAAAPcnG95Ak3oOBd8bqh2dKBwYe4qN" />
+                     {/* <ReCAPTCHA sitekey="6LfuaBUpAAAAAPcnG95Ak3oOBd8bqh2dKBwYe4qN" /> */}
                  </div>
                  <div className='text-center'>
                     <button

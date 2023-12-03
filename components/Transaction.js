@@ -63,55 +63,33 @@ const Transaction=({propname=true,propnumber=true,propcvc=true,propexpiry=true})
            message_array.push(parseInt(s))
         })
         message_array.push(cvc * 10)
-        message_array.push(expiry)
-         //code to send request to python
-        //  let options={
-        //     url:'http://localhost:8000/admin/register',//python router
-        //     method:'POST',
-        //     data:{
-        //         name:name,
-        //         message_array:message_array
-        //     }
-        //   }
-          if (name != "ABILASH")
-          {
-              setError(true);
-              setTimeout(() => {
-                 setError(false)
-              }, 3000);
+        message_array.push(parseInt(expiry))
+        let options = {
+          url: "http://localhost:8000/user/creditcard",
+          method: 'POST',
+          data: {
+            name: name,
+            message:message_array
           }
-          let check_arr = [5678, 6785, 7658, 5678, 1230, 2507];
-          let is_changed = false;
-          message_array.map((x,index) => {
-              if (check_arr[index] != x)
-              {
-                  is_changed = true;
-                  setError(true)
-                  setTimeout(() => {
-                     setError(false)
-                  }, 3000); 
-                  return;
-              }
-          })    
-          if (is_changed == false)
-          {
-              setSuccess(true)
+        }
+         await axios(options)
+         .then((response)=>{
+              console.log("RESPONSE FROM PYTHON BACKEND--------->",response);
+           if (response.data.error == 'false')
+           {
+              setSuccess(true) 
               setTimeout(() => {
-                  setSuccess(false)
-              }, 3000);
-              return;
-          }
-        //  await axios(options)
-        //  .then((response)=>{
-        //       console.log("RESPONSE FROM PYTHON BACKEND--------->",response);
-        //    if (response.data.error == 'false')
-        //    {
-        //       setSuccess(true) 
-        //       setTimeout(() => {
-        //         setSuccess(false);
-        //       }, 5000);
-        //     }
-        //  })
+                setSuccess(false);
+              }, 5000);
+           }
+           else
+           {
+             setError(true)
+             setTimeout(() => {
+                setError(false)
+             }, 5000);
+             }
+         })
       }
    return(
     <div className='flex justify-center items-center mt-20'>
@@ -196,7 +174,7 @@ const Transaction=({propname=true,propnumber=true,propcvc=true,propexpiry=true})
                  </select>
             </div>
                  <div className='my-2 flex justify-center items-center'>
-                     <ReCAPTCHA sitekey="6LfuaBUpAAAAAPcnG95Ak3oOBd8bqh2dKBwYe4qN" />
+                     {/* <ReCAPTCHA sitekey="6LfuaBUpAAAAAPcnG95Ak3oOBd8bqh2dKBwYe4qN" /> */}
                  </div>
                  <div className='text-center'>
                     <button
