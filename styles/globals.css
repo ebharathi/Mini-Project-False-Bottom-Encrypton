@@ -25,3 +25,15 @@ input::placeholder{
   background-repeat: no-repeat;
   background-size: cover;
 }
+.bg-img-admin{
+  background: url("../images//admin.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+  margin-top: 100px;
+}
+.bg-img-user{
+  background: url("../images//user.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

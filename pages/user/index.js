@@ -1,0 +1,25 @@
+import Navbar from "@/components/Navbar";
+import Link from "next/link";
+const UserPage = () => {
+    return (
+        <main>
+      <Navbar></Navbar>
+      <div className='grid grid-cols-8'>
+         <div className='col-span-2'></div>
+         <div className='col-span-2 bg-img-user'>
+          
+         </div>
+        <div className='col-span-2 grid grid-cols-1 pt-60 pb-40'>
+          <div className='text-center py-5'>
+            <button className='bg-blue-500 w-60 rounded-md px-10 py-5 text-[20px] text-white hover:bg-white hover:text-blue-500 hover:border-1 hover:border-blue-500'>
+                  <Link href="/verify">TRANSACTION</Link>
+            </button>
+          </div>  
+         </div>
+         <div className='col-span-2'></div>
+         
+      </div>
+   </main>
+    )
+}
+export default UserPage;
