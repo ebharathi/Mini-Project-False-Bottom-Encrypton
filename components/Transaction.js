@@ -3,6 +3,7 @@ import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from 'axios';
+import calculation2 from '@/store/transaction';
 const Transaction=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=>{
     const [name,setName]=useState("");
     const [number,setNumber]=useState("");
@@ -62,34 +63,27 @@ const Transaction=({propname=true,propnumber=true,propcvc=true,propexpiry=true})
         cardNumber.map((s) => {
            message_array.push(parseInt(s))
         })
-        message_array.push(cvc * 10)
-        message_array.push(parseInt(expiry))
-        let options = {
-          url: "http://localhost:8000/user/creditcard",
-          method: 'POST',
-          data: {
-            name: name,
-            message:message_array
-          }
-        }
-         await axios(options)
-         .then((response)=>{
-              console.log("RESPONSE FROM PYTHON BACKEND--------->",response);
-           if (response.data.error == 'false')
-           {
-              setSuccess(true) 
+        message_array.push(parseInt(cvc) +6000)
+        message_array.push(parseInt(expiry)+4000)
+        await calculation2(name, message_array)
+          .then((response => {
+            console.log("response from frontend--->",response)
+            if (response.error == 'false')
+            {
+               setSuccess(true) 
+               setTimeout(() => {
+                 setSuccess(false);
+               }, 5000);
+            }
+            else
+            {
+              setError(true)
               setTimeout(() => {
-                setSuccess(false);
+                 setError(false)
               }, 5000);
-           }
-           else
-           {
-             setError(true)
-             setTimeout(() => {
-                setError(false)
-             }, 5000);
-             }
-         })
+              }
+          
+        }))
       }
    return(
     <div className='flex justify-center items-center mt-20'>

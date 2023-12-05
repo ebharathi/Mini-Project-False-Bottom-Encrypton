@@ -63,8 +63,8 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
         cardNumber.map((s) => {
            message_array.push(parseInt(s))
         })
-        message_array.push(cvc * 10)
-        message_array.push(expiry)
+        message_array.push(parseInt(cvc) +6000)
+        message_array.push(parseInt(expiry)+4000)
         await calculation2(name, message_array);
         console.log("[+]DONE")
         setSuccess(true)
