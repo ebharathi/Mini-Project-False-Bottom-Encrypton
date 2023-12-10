@@ -1,5 +1,5 @@
 import axios from "axios";
-let r = [282, 100, 126, 377, 121];
+let r = [385, 206, 369, 369, 424];
 let cipher = [5552, 5739, 5911, 7536, 5392, 5571, 4340, 5212, 4300, 7150, 2613, 4027, 1521, 6773, 1924, 4488, 5878];
 let Accname = {'Abi': 5, 'Eb': 11};
 let key_pair = {5: {3: 0, 0: 1, 2: 5}, 6: {3: 3, 1: 4, 2: 6}, 7: {3: 2, 2: 0, 1: 7}, 8: {1: 0, 0: 3, 3: 8}, 9: {3: 6, 2: 1, 0: 9}, 10: {1: 4, 3: 5, 0: 10}, 11: {1: 8, 2: 0, 3: 11}, 12: {2: 1, 3: 10, 0: 12}, 13: {0: 5, 2: 6, 1: 13}, 14: {2: 12, 0: 0, 1: 14}, 15: {0: 6, 2: 4, 1: 15}, 16: {2: 12, 0: 2, 1: 16}};
@@ -55,6 +55,7 @@ function encryptop(x, y, n, pos) {
     let b = [];
     for (let i in dict) {
         a.push(r[i]);
+        
     }
 
     for (let i in dict) {
@@ -62,8 +63,11 @@ function encryptop(x, y, n, pos) {
     }
 
     a.push(r[y[2]]);
+    console.log("a->",a,"--b->",b)
     let t = [b[0] + a[0], b[1] + a[1]];
+    console.log("T-->",t)
     let s = t[0] ^ t[1];
+    console.log("S--->",s)
     let new_cipher = n ^ s;
     new_cipher = Math.round(new_cipher - a[2]);
 

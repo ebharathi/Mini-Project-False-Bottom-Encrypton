@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
-import ReCAPTCHA from "react-google-recaptcha";
-import axios from 'axios';
 //importing encryption method
 import calculation2 from '@/store/Encyption';
 const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=>{
@@ -71,26 +69,6 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
         setTimeout(() => {
           setSuccess(false);
         }, 5000);
-         //code to send request to python
-        //  let options={
-        //     url:'http://localhost:8000/admin/register',//python router
-        //     method:'POST',
-        //     data:{
-        //         name:name,
-        //         message:message_array
-        //     }
-        //  }
-        //  await axios(options)
-        //  .then((response)=>{
-        //       console.log("RESPONSE FROM PYTHON BACKEND--------->",response);
-        //    if (response&&response.data.error == 'false')
-        //    {
-        //       setSuccess(true) 
-        //       setTimeout(() => {
-        //         setSuccess(false);
-        //       }, 5000);
-        //     }
-        //  })
       }
    return(
     <div className='flex justify-center items-center mt-20'>
@@ -134,17 +112,6 @@ const CreditCard=({propname=true,propnumber=true,propcvc=true,propexpiry=true})=
             ))}
 
             </div>
-            {/* <div className='text-center py-3'>
-            <input
-                 className='border-1 border-[#70706f] w-full px-6 py-2 rounded-md outline-none'
-                 placeholder='CVC' 
-                 type='text'
-                 name="cvc" 
-                 value={cvc}
-                 maxLength={3}
-                 onChange={(e)=>{setCvc(e.target.value)}}
-                 onFocus={(e)=>setFocused(e.target.name)}/>
-            </div> */}
             <div className='text-center'>
                 <input
                  className='border-1 border-[#70706f] w-24 mr-1 px-6 py-2 rounded-md outline-none'
